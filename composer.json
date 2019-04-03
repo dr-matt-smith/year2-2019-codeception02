@@ -1,0 +1,10 @@
+{
+    "require": {
+        "codeception/codeception": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tudublin\\":"src"
+        }
+    }
+}
