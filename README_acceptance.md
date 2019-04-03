@@ -46,7 +46,7 @@
               [GuzzleHttp\Exception\ConnectException] cURL error 7: Failed to connect to localhost port 80: Connection refused (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)  
         ```
         
-1. Fix the problem by setting the `url` configuration in `/tests/accpetance.suite.yml` to `http://localhost:800`:
+1. Fix the problem by setting the `url` configuration in `/tests/acceptance.suite.yml` to `http://localhost:800`:
 
     ```yaml
      actor: AcceptanceTester
@@ -57,6 +57,12 @@
              - \Helper\Acceptance
     ```
     
+    - run the acceptance test again
+    
+        ```bash
+            vendor/bin/codecept run acceptance
+        ```
+        
     - now it should (hopefully!) pass:
     
         ```bash

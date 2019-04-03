@@ -1,5 +1,4 @@
 <?php
-
 namespace Tudublin;
 
 
@@ -10,10 +9,19 @@ class LoginController
         $username = filter_input(INPUT_POST, 'username');
 
         if('admin' == $username){
-            print 'admin home page';
+            $adminController = new AdminController();
+            $adminController->adminHome();
         } else {
-            print 'error';
+            require_once __DIR__ . '/../templates/error.php';
         }
+    }
+
+    private function isValid($username)
+    {
+        if('admin' == $username)
+            return true;
+
+        return false;
     }
 
 }

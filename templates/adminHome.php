@@ -2,9 +2,8 @@
 <html>
 <body>
 
-<h1>home page</h1>
+<h1>Admin home</h1>
 
-hello world
 
 <?php
 require_once __DIR__ . '/_nav.php';

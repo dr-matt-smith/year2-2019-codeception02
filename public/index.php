@@ -1,21 +1,31 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use Tudublin\MainController;
+use Tudublin\AdminController;
+use Tudublin\LoginController;
+
 $action = filter_input(INPUT_GET, 'action');
 if(empty($action)){
     $action = filter_input(INPUT_POST, 'action');
 }
 
-$loiginController = new \Tudublin\LoginController();
+$loginController = new LoginController();
+$mainController = new MainController();
+$adminController = new AdminController();
 switch ($action){
+    case 'adminHome':
+        $adminController->adminHome();
+        break;
+
     case 'processLogin':
-        $loiginController->processLogin();
+        $loginController->processLogin();
         break;
 
     case 'login':
-        require_once __DIR__ . '/../templates/login.php';
+        $mainController->loginForm();
         break;
 
     default:
-        require_once __DIR__ . '/../templates/home.php';
+        $mainController->home();
 }

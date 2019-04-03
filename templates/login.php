@@ -1,3 +1,9 @@
+<!doctype html>
+<html>
+<body>
+
+<h1>Login</h1>
+
 <form
     action="index.php"
     method="post"
@@ -12,5 +18,8 @@
     password:
         <input name="password" id="password">
 
-    <input type="submit" name="LOGIN" id="login">
+    <input type="submit" name="login_name" id="login_id" value="LOGIN">
 </form>
+
+<?php
+require_once __DIR__ . '/_nav.php';
