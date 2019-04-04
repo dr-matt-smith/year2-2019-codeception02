@@ -28,6 +28,10 @@ class AdminCest
         // Assert - should see ADMIN home contents
         $I->see( 'Admin home', 'body h1');
 
+        // do NOT error - since login was successful
+        $I->dontSee('error');
+
+
     }
 
 

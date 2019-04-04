@@ -91,10 +91,94 @@
         
 
 
-## The PhPBrowser class
+## The PPPBrowser class
 
 All the methods that `$I` can perform are defined in PhpBrowser module of Cdeoception. Learn more at the Codeception documentation pages:
 
 - https://codeception.com/docs/modules/PhpBrowser
+
+Some of the most common methods we use in Acceptance Testing are illustraterd below.
+
+### Actions (go to page / click link / fill in form field)
+
+- make browser request a specific URL:
+    
+    ```php
+        $I->amOnPage('<url>');
+        e.g.
+        $I->amOnPage('/index.php?action=login');
+    ```
+
+
+- fill in a form field with a value:
+
+    ```php
+        $I->fillField(<fieldName>, <value>);
+        e.g.
+        $I->fillField('username', 'admin');
+    ```
+
+- click a link or submit button:
+        
+    ```php
+        $I->click(<linkText-or-submit-button-text>);
+        e.g.
+        $I->click('LOGIN');
+    ```
+
+### Assertions (testing what should be true)
+
+- see some specific content in the current URL:
+
+    ```php
+        $I->seeInCurrentUrl(<part-of-url>);
+        e.g.
+        $I->seeInCurrentUrl('action=about');
+    ```
+
+- see text in the HTML Response returned to the browser (could be in HTML title and not seen by user):
+    
+    ```php
+        $I->see(<text>);
+        e.g.
+        $I->see('home page');
+    ```
+
+- see text in a specific element (using CSS selectors):
+    
+    ```php
+        $I->see(<css selector>, <text>);
+        e.g.
+         $I->see('home page', 'body h1');
+    ```
+
+- see text that is a link, or a submit button with a value:
+
+    ```php
+        $I->seeLink(<linkText>);
+        e.g.
+        $I->seeLink('back to home');
+    ```
+    
+- see a specific element, with ID or Class selector:
+
+    ```php
+        $I->seeElement(<elementSelector>);
+        e.g.
+        $I->seeElement('#login_id');
+    ```
+
+    
+### Negative assertions (stating something should NOT be true)
+
+- do NOT see some text
+
+    ```php
+        $I->dontSee(textNotExpectToSee);
+
+        e.g. after what should be a successful action
+        $I->dontSee('error');
+    ```
+
 
 
