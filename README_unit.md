@@ -41,7 +41,11 @@
     
         ```bash
             vendor/bin/codecept run
+        ```
+        
+        there should now be some reporting in the Terminal as Codeception runs
 
+        ```bash
             Codeception PHP Testing Framework v2.5.5
             Powered by PHPUnit 7.5.8 by Sebastian Bergmann and contributors.
             Running with seed: 
