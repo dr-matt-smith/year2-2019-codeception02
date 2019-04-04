@@ -1,12 +1,71 @@
-## Acceptance testing
+# Acceptance testing with Databases
+
+## Configuring for _your_ database
+    
+1. Database credentials 
+
+    - edit the credentials in file `codeception.yml` to match your database name / user / password
+    
+        ```yaml
+           dsn: 'mysql:host=localhost;dbname=evote'
+           user: 'root'
+           password: 'passpass'
+           dump: 'tests/_data/dump.sql'
+        ```
+    
+1. SQL dump:
+
+    - create / copy the SQL to create your database tables, and insert initial fixtures test data as file to match the `dump` configuration location
+    
+    - i.e. `tests/_data/dump.sql` 
+    
+    - in most cases this will be the same as the contents of your `/db` folder, if you have been following Matt's examples. Here is a typical SQL dump used for resetting the Database stucture and contents **before** each test in run (to keep tests independent of each other):>
+    
+        ```sql
+            -- create the table
+            create table if not exists movie (
+                id integer primary key AUTO_INCREMENT,
+                title text,
+                price float
+            );
+            
+            -- insert some data
+            insert into movie values (1, 'Jaws',9.99);
+            insert into movie values (2, 'Jaws2',4);
+            insert into movie values (3, 'Mama Mia',9.99);
+            insert into movie values (4, 'Forget Paris',8);
+        ```
+    
+    
+That's it - you should now have a Codeception configuration that will reset the database to match your `dump` SQL contents before each test is ruin
+
+
+NOTE: Since testing involves resetting the database each time, it is common practice to use a DIFFERENT database schema for your testing, than your **live** website database. You can do this easily, just change the name of the database in the `dsn` configuration, e.g. add the suffix `test`:
+
+```yaml
+   dsn: 'mysql:host=localhost;dbname=evotetest'
+```
+
+## Writing DB acceptance tests - counting records
+
+If we were testing using the above SQL dump, we know there should be 4 records in table `movie` when each test begins. 
+
+Just by **counting** the number of records in a table, we can write tests that change the database such as the following:
+
+    - test to create new record in DB - number of records should be 5 after actions
+    
+    - test to DELETE a record - number of records should be 3 after actions
+    
+    - test to DELETE all records - number of records should be 0 after actions
+    
 
 1. We use `g:cest` to generate an acceptance test:
 
 	```bash
-		vendor/bin/codecept g:cest acceptance HomePage
+		vendor/bin/codecept g:cest acceptance CreateRecordsCest
 	```
 	
-	- Acceptance test class `tests/acceptance/HomePageCest.php` should have been created
+	- Acceptance test class `tests/acceptance/CreateRecordsCest.php` should have been created
 	
 1. Edit the class to test that the text `home page` can be found when we visit `/` in our web browser:
 
@@ -15,20 +74,17 @@
        
        class HomePageCest
        {
-           public function homepageWorking(AcceptanceTester $I)
-           {
-               // Act - request URL '/'
-               $I->amOnPage('/');
-            
-               // Assert
-       
-               // you may need to change text/case - to match text appearing on _your_ home page :-)
-               // we should see this text somewhere in the contents of the Request
-               $I->see('home page');
-            
-               // use CSS selector to specify that it is in an <h1> that we expected to see this text
-               $I->see('home page', 'body h1');
-           }
+            public function testInitialRecordsInDatabaseAsExpected(AcceptanceTester $I)
+            {
+                $I->seeNumRecords(4, 'dvds');  //executed on db_books database
+        
+            }
+        
+            public function indexCreateOneRecord(AcceptanceTester $I)
+            {
+                $I->amOnPage('/');
+                $I->seeNumRecords(5, 'dvds');  //executed on db_books database
+            }
        }
     ```
 	
@@ -168,13 +224,6 @@ Some of the most common methods we use in Acceptance Testing are illustraterd be
         $I->seeElement('#login_id');
     ```
 
-- expect to see a particular number of records in a Database table
-
-    ```php
-      $I->seeNumRecords(<count>, <tableName>);
-      e.g.
-      $I->seeNumRecords(4, 'movie'); 
-    ```
     
 ### Negative assertions (stating something should NOT be true)
 

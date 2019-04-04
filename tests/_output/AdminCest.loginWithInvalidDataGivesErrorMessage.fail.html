@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>EVOTE MOVIE - login page</title>
+    <meta charset="utf-8">
+    <style>
+        @import "/css/basic.css";
+        @import "/css/nav.css";
+        @import "/css/footer.css";
+    </style>
+</head>
+<body>
+
+
+
+<header>
+    <!-- LOGIN LINK -->
+    <span style="float: right; text-align: right;">
+                    <a href="index.php?action=login">Login</a>
+            </span>
+
+    <!-- LOGO -->
+    <img src="/images/smithit_logo.gif" alt="logo">
+</header>
+
+
+<nav>
+    <ul>
+        <li>
+            <a href="index.php" class="">Home</a>
+        </li>
+
+        <li>
+            <a href="index.php?action=about"  class="">About Us</a>
+        </li>
+
+        <li>
+            <a href="index.php?action=list"  class="">Movie ratings</a>
+        </li>
+
+        <li>
+            <a href="index.php?action=listCheap"  class="">cheap movies</a>
+        </li>
+
+        <li>
+            <a href="index.php?action=contact"  class="">Contact Us</a>
+        </li>
+
+        <li>
+            <a href="index.php?action=sitemap"  class="">Site Map</a>
+        </li>
+    </ul>
+</nav>
+
+    <div style="background-color: pink">
+        invalid credentials - please try again    </div>
+
+<form action="index.php" method="POST">
+    <input type="hidden" name="action" value="processLogin">
+
+    <p>
+    Username:
+    <input name="username">
+    <p>
+        Password:
+        <input type="password" name="password">
+
+    <p>
+    <input type="submit" value="LOGIN">
+
+</form>
+
+
+
+<footer>
+    2019 &copy; A Matt Smith productions international enterprises limited production
+</footer>
+
+</body>
+</html>
