@@ -58,11 +58,11 @@ class LoginCest
         // submit button has value 'LOGIN'
         $I->seeInField('input[type="submit"]','LOGIN');
 
-        // submit button has name 'login_name'
-        $I->seeInField('input[name="login_name"]','LOGIN');
-
-        // an element with ID = 'login_id'
-        $I->seeElement('#login_id');
+//        // submit button has name 'login_name'
+//        $I->seeInField('input[name="login_name"]','LOGIN');
+//
+//        // an element with ID = 'login_id'
+//        $I->seeElement('#login_id');
     }
 
     /**

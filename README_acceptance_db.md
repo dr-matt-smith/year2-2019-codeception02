@@ -113,7 +113,10 @@ Just by **counting** the number of records in a table, we can write tests that c
         
             public function indexCreateOneRecord(AcceptanceTester $I)
             {
-                $I->amOnPage('/');
+                // do actions in website to cerate ONE record 
+                // - e.g. fill in form and click submit for new record
+             
+               // Asserrt - one more record in DB !
                 $I->seeNumRecords(5, 'dvds');  //executed on db_books database
             }
        }

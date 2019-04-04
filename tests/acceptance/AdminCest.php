@@ -49,6 +49,10 @@ class AdminCest
 
         // Assert
         $I->see('error');
+
+        // Assert - should NOT see ADMIN home contents
+        $I->dontSee( 'Admin home', 'body h1');
+
     }
 
     /**

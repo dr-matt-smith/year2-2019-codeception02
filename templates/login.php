@@ -18,7 +18,7 @@
     password:
         <input name="password" id="password">
 
-    <input type="submit" name="login_name" id="login_id" value="LOGIN">
+    <input type="submit"  value="LOGIN">
 </form>
 
 <?php
