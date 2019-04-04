@@ -1,6 +1,6 @@
 ## Acceptance testing
 
-1. Generate an acceptance test:
+1. We use `g:cest` to generate an acceptance test:
 
 	```bash
 		vendor/bin/codecept g:cest acceptance HomePage
@@ -34,13 +34,13 @@
 	
 1. In one terminal window, run your web server
 
-1. In a second terminal window, run your acceptance tests:
+1. In a second terminal window, run your acceptance tests (by adding `acceptance` after `run` we are saying we **only** want to run acceptance tests, and ignore any unit or functional tests):
 
     ```bash
         vendor/bin/codecept run acceptance
     ```
     
-    - it will probably fail, due to Codeception's default web server port guess of 80, rather than our usual 8000:
+    - unless you are using a web server like Apache then it will probably fail, due to Codeception's default web server port guess of 80, rather than our usual 8000:
     
         ```bash
               [GuzzleHttp\Exception\ConnectException] cURL error 7: Failed to connect to localhost port 80: Connection refused (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)  
@@ -83,6 +83,11 @@
 
         ```
         
+    - if the test still fails, then it means you don't have a level 1 heading containing `home page` on your home page
+    
+        - either fix the test (to test for some text you want on the home page)
+        
+        - or fix the contents of the template outputting the home page, to also output `<h1>home page</h1>`
         
 
 
